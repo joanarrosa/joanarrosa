@@ -67,6 +67,87 @@ function OptionButtons({
   );
 }
 
+function usedTokenIndices(tokens: string[], chosenWords: string[]): number[] {
+  const used: number[] = [];
+  for (const word of chosenWords) {
+    const idx = tokens.findIndex((t, i) => t === word && !used.includes(i));
+    if (idx !== -1) used.push(idx);
+  }
+  return used;
+}
+
+function SentenceBuilder({
+  tokens,
+  value,
+  disabled,
+  correctAnswer,
+  isCorrect,
+  onChange,
+}: {
+  tokens: string[];
+  value: string;
+  disabled: boolean;
+  correctAnswer: string;
+  isCorrect: boolean | null;
+  onChange: (v: string) => void;
+}) {
+  const chosenWords = value.trim().length ? value.trim().split(" ") : [];
+  const used = usedTokenIndices(tokens, chosenWords);
+  const availableIndices = tokens.map((_, i) => i).filter((i) => !used.includes(i));
+
+  function removeAt(chosenIndex: number) {
+    if (disabled) return;
+    const next = chosenWords.filter((_, i) => i !== chosenIndex);
+    onChange(next.join(" "));
+  }
+
+  function addToken(tokenIndex: number) {
+    if (disabled) return;
+    onChange([...chosenWords, tokens[tokenIndex]].join(" "));
+  }
+
+  return (
+    <div>
+      {/* Built sentence so far — tap a word here to remove it */}
+      <div className="min-h-[4rem] flex flex-wrap items-start gap-2 border-b-2 border-gray-200 pb-4 mb-6">
+        {chosenWords.length === 0 && <span className="text-gray-300 text-lg">Tap words below...</span>}
+        {chosenWords.map((word, i) => (
+          <button
+            key={`${word}-${i}`}
+            type="button"
+            disabled={disabled}
+            onClick={() => removeAt(i)}
+            className="px-3 py-2 rounded-lg border-2 border-duo-blue bg-sky-50 text-sky-700 font-semibold disabled:opacity-70"
+          >
+            {word}
+          </button>
+        ))}
+      </div>
+
+      {/* Word bank */}
+      <div className="flex flex-wrap gap-2">
+        {availableIndices.map((i) => (
+          <button
+            key={i}
+            type="button"
+            disabled={disabled}
+            onClick={() => addToken(i)}
+            className="px-3 py-2 rounded-lg border-2 border-gray-200 bg-white text-gray-700 font-semibold hover:border-gray-300 disabled:opacity-40"
+          >
+            {tokens[i]}
+          </button>
+        ))}
+      </div>
+
+      {disabled && !isCorrect && (
+        <p className="mt-6 text-gray-600">
+          Correct: <strong>{correctAnswer}</strong>
+        </p>
+      )}
+    </div>
+  );
+}
+
 export default function ExerciseView({ exercise, value, onChange, disabled, isCorrect }: ExerciseViewProps) {
   switch (exercise.type) {
     case "listening":
@@ -154,6 +235,22 @@ export default function ExerciseView({ exercise, value, onChange, disabled, isCo
           </div>
           <OptionButtons
             options={exercise.options}
+            value={value}
+            disabled={disabled}
+            correctAnswer={exercise.correctAnswer}
+            isCorrect={isCorrect}
+            onChange={onChange}
+          />
+        </div>
+      );
+
+    case "sentence-builder":
+      return (
+        <div>
+          <p className="text-gray-500 font-semibold mb-1">Build the sentence in Dutch:</p>
+          <h2 className="text-xl font-bold text-gray-800 mb-6">{exercise.promptEn}</h2>
+          <SentenceBuilder
+            tokens={exercise.tokens}
             value={value}
             disabled={disabled}
             correctAnswer={exercise.correctAnswer}

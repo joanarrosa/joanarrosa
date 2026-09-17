@@ -2,8 +2,8 @@ import type { Unit } from "../types";
 
 export const unit06: Unit = {
   id: "u6",
-  title: "Grammar: Articles & Word Order",
-  description: "de/het and getting your verb in the right spot",
+  title: "Grammar: Building Sentences",
+  description: "de/het, word order, negation, connectors, and questions",
   color: "duo-red",
   lessons: [
     {
@@ -54,6 +54,79 @@ export const unit06: Unit = {
         { nl: "ga je mee?", en: "are you coming along?", phonetic: "khah yuh may" },
         { nl: "waarom huil je?", en: "why are you crying?", phonetic: "VAH-rom hoyl yuh" },
         { nl: "wat doe je?", en: "what are you doing?", phonetic: "vat doo yuh" },
+      ],
+      sentences: [
+        { nl: "Ik drink koffie", en: "I drink coffee" },
+        { nl: "Morgen ga ik werken", en: "Tomorrow I'm going to work" },
+        { nl: "Vandaag heb ik tijd", en: "Today I have time" },
+        { nl: "Ga je mee?", en: "Are you coming along?" },
+        { nl: "Wat doe je?", en: "What are you doing?" },
+      ],
+    },
+    {
+      id: "u6-l3",
+      title: "Negation & Connectors",
+      kind: "grammar",
+      grammarTips: [
+        {
+          title: "niet vs. geen",
+          body: "'Niet' negates verbs, adjectives, and definite nouns ('Ik ga niet' — I'm not going). 'Geen' negates an indefinite noun — anywhere you'd otherwise use 'een' or no article at all: 'Ik heb geen tijd' (I have no time), not 'Ik heb niet tijd'.",
+        },
+        {
+          title: "omdat sends the verb to the end",
+          body: "'Want' (because) doesn't change word order. But 'omdat' (because) is a subordinating conjunction — it pushes the conjugated verb to the very end of its clause: 'Ik blijf thuis omdat ik ziek ben' (I stay home because I sick am).",
+        },
+      ],
+      words: [
+        { nl: "niet", en: "not", phonetic: "neet" },
+        { nl: "geen", en: "no / not any", phonetic: "khayn" },
+        { nl: "en", en: "and", phonetic: "en" },
+        { nl: "maar", en: "but", phonetic: "mahr" },
+        { nl: "of", en: "or", phonetic: "of" },
+        { nl: "want", en: "because (doesn't move the verb)", phonetic: "vant" },
+        { nl: "dus", en: "so", phonetic: "dus" },
+        { nl: "omdat", en: "because (sends verb to end)", phonetic: "OM-dat" },
+        { nl: "als", en: "if", phonetic: "als" },
+      ],
+      sentences: [
+        { nl: "Ik heb geen tijd", en: "I have no time" },
+        { nl: "Ik ga niet naar school", en: "I'm not going to school" },
+        { nl: "Ik wil koffie maar ik heb geen geld", en: "I want coffee but I have no money" },
+        { nl: "Ik blijf thuis want ik ben ziek", en: "I'm staying home because I'm sick" },
+        { nl: "Ik ben moe dus ik ga slapen", en: "I'm tired so I'm going to sleep" },
+      ],
+    },
+    {
+      id: "u6-l4",
+      title: "Asking Questions",
+      kind: "grammar",
+      grammarTips: [
+        {
+          title: "Question word, then verb, then subject",
+          body: "Open questions start with the question word, followed immediately by the conjugated verb, then the subject: 'Waar woon je?' (Where live you?) = 'Where do you live?'",
+        },
+        {
+          title: "wat vs. welke",
+          body: "'Wat' is a general 'what'. 'Welke' means 'which' and is used when picking from a set: 'Welke kleur wil je?' (Which color do you want?).",
+        },
+      ],
+      words: [
+        { nl: "wie", en: "who", phonetic: "vee" },
+        { nl: "wat", en: "what", phonetic: "vat" },
+        { nl: "waar", en: "where", phonetic: "vahr" },
+        { nl: "wanneer", en: "when", phonetic: "va-NAYR" },
+        { nl: "waarom", en: "why", phonetic: "VAH-rom" },
+        { nl: "hoe", en: "how", phonetic: "hoo" },
+        { nl: "welke", en: "which", phonetic: "VEL-kuh" },
+        { nl: "hoeveel", en: "how much / how many", phonetic: "hoo-FAYL" },
+      ],
+      sentences: [
+        { nl: "Wie ben jij?", en: "Who are you?" },
+        { nl: "Wat wil je doen?", en: "What do you want to do?" },
+        { nl: "Waar woon je?", en: "Where do you live?" },
+        { nl: "Wanneer kom je?", en: "When are you coming?" },
+        { nl: "Hoe heet je?", en: "What is your name?" },
+        { nl: "Welke kleur wil je?", en: "Which color do you want?" },
       ],
     },
   ],

@@ -3,6 +3,8 @@ import type {
   Exercise,
   Lesson,
   MultipleChoiceExercise,
+  SentenceBuilderExercise,
+  SentenceExample,
   TypingExercise,
   VerbConjugation,
   Word,
@@ -107,6 +109,22 @@ function buildConjugationExercises(conj: VerbConjugation): ConjugationExercise[]
   }));
 }
 
+function buildSentenceExercise(sentence: SentenceExample, id: string): SentenceBuilderExercise {
+  const words = sentence.nl.split(" ");
+  let tokens = shuffle(words);
+  // Avoid handing back the answer pre-solved when shuffle happens to no-op.
+  if (tokens.join(" ") === sentence.nl && words.length > 2) {
+    tokens = [tokens[1], tokens[0], ...tokens.slice(2)];
+  }
+  return {
+    id,
+    type: "sentence-builder",
+    promptEn: sentence.en,
+    tokens,
+    correctAnswer: sentence.nl,
+  };
+}
+
 /**
  * Builds a randomized, varied exercise set for a lesson.
  * `wordPool` is the broader vocabulary bank used to source plausible wrong answers.
@@ -136,6 +154,12 @@ export function buildLessonExercises(lesson: Lesson, wordPool: Word[]): Exercise
     for (const conj of lesson.conjugations) {
       exercises.push(...buildConjugationExercises(conj));
     }
+  }
+
+  if (lesson.sentences) {
+    lesson.sentences.forEach((sentence, i) => {
+      exercises.push(buildSentenceExercise(sentence, `${lesson.id}-sentence-${i}`));
+    });
   }
 
   return shuffle(exercises);

@@ -10,6 +10,7 @@ import { unit08 } from "./unit08";
 import { unit09 } from "./unit09";
 import { unit10 } from "./unit10";
 import { unit11 } from "./unit11";
+import { unit12 } from "./unit12";
 
 export const UNITS: Unit[] = [
   unit01,
@@ -23,6 +24,7 @@ export const UNITS: Unit[] = [
   unit09,
   unit10,
   unit11,
+  unit12,
 ];
 
 export const ALL_LESSONS = UNITS.flatMap((u) => u.lessons);

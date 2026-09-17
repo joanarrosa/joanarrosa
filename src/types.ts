@@ -9,6 +9,14 @@ export interface Word {
   note?: string;
   /** Optional word type tag, e.g. "verb", "noun", "phrase" */
   tag?: string;
+  /** Optional example sentence showing the word used in a real phrase */
+  example?: { nl: string; en: string };
+}
+
+/** A full example sentence used to teach word order / phrase construction. */
+export interface SentenceExample {
+  nl: string;
+  en: string;
 }
 
 export interface ConjugationRow {
@@ -38,6 +46,8 @@ export interface Lesson {
   words: Word[];
   conjugations?: VerbConjugation[];
   grammarTips?: GrammarTip[];
+  /** Example sentences used to generate sentence-builder exercises. */
+  sentences?: SentenceExample[];
 }
 
 export interface Unit {
@@ -53,7 +63,8 @@ export type ExerciseType =
   | "multiple-choice-en-nl"
   | "listening"
   | "typing"
-  | "conjugation-fill";
+  | "conjugation-fill"
+  | "sentence-builder";
 
 export interface ExerciseBase {
   id: string;
@@ -87,10 +98,20 @@ export interface ConjugationExercise extends ExerciseBase {
   correctAnswer: string;
 }
 
+export interface SentenceBuilderExercise extends ExerciseBase {
+  type: "sentence-builder";
+  promptEn: string;
+  /** Shuffled word chips (including the one correct set of tokens). */
+  tokens: string[];
+  /** The correctly ordered sentence, space-joined, used for scoring and display. */
+  correctAnswer: string;
+}
+
 export type Exercise =
   | MultipleChoiceExercise
   | TypingExercise
-  | ConjugationExercise;
+  | ConjugationExercise
+  | SentenceBuilderExercise;
 
 export interface Progress {
   xp: number;

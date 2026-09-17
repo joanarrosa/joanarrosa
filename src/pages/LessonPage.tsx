@@ -5,6 +5,7 @@ import { buildLessonExercises, normalizeAnswer } from "../lib/exercises";
 import { loadProgress, recordLessonComplete } from "../lib/storage";
 import ProgressBar from "../components/ProgressBar";
 import ExerciseView from "../components/ExerciseView";
+import LessonFlashcards from "../components/LessonFlashcards";
 import type { Progress } from "../types";
 
 const XP_PER_CORRECT = 10;
@@ -26,6 +27,7 @@ export default function LessonPage() {
   const [correctCount, setCorrectCount] = useState(0);
   const [finished, setFinished] = useState<Progress | null>(null);
   const [showIntro, setShowIntro] = useState(true);
+  const [showFlashcards, setShowFlashcards] = useState(true);
 
   if (!found) {
     return (
@@ -43,7 +45,7 @@ export default function LessonPage() {
 
   function evaluate(): boolean {
     if (!current) return false;
-    if (current.type === "typing") {
+    if (current.type === "typing" || current.type === "sentence-builder") {
       return normalizeAnswer(value) === normalizeAnswer(current.correctAnswer);
     }
     return value === current.correctAnswer;
@@ -126,6 +128,16 @@ export default function LessonPage() {
           </button>
         </div>
       </div>
+    );
+  }
+
+  if (showFlashcards && lesson.words.length > 0) {
+    return (
+      <LessonFlashcards
+        words={lesson.words}
+        lessonTitle={lesson.title}
+        onDone={() => setShowFlashcards(false)}
+      />
     );
   }
 
