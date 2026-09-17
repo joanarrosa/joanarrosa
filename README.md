@@ -22,7 +22,34 @@ and no ads.
 - **Streaks, XP, and a daily goal**, saved locally in your browser — no
   account needed.
 
-## Running it locally
+## Using it — no install needed
+
+Once GitHub Pages is enabled for this repo (see below), the app is live at:
+
+**https://joanarrosa.github.io/**
+
+Just open that link — nothing to download or run. It's also a installable
+app (PWA):
+
+- **iPhone/iPad (Safari)**: open the link → Share button → "Add to Home
+  Screen". It'll appear as an app icon and open full-screen.
+- **Android (Chrome)**: open the link → tap the "Install app" prompt (or
+  menu → "Install app"/"Add to Home screen").
+- **Desktop (Chrome/Edge)**: open the link → click the install icon (⊕) in
+  the address bar, or menu → "Install Leer Nederlands...".
+
+Once installed, previously-visited lessons keep working offline.
+
+### One-time setup for the site to go live
+
+GitHub Pages needs to be turned on once, by whoever owns this repo:
+**Settings → Pages → Source → "GitHub Actions"**. After that, every push
+automatically rebuilds and redeploys the site via
+`.github/workflows/deploy.yml` — no further steps needed.
+
+## Running it locally instead
+
+If you'd rather run it from source:
 
 ```bash
 npm install
