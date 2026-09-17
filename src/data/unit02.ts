@@ -1,0 +1,55 @@
+import type { Unit } from "../types";
+
+export const unit02: Unit = {
+  id: "u2",
+  title: "Numbers",
+  description: "Count from zero to a hundred",
+  color: "duo-blue",
+  lessons: [
+    {
+      id: "u2-l1",
+      title: "Numbers 0–10",
+      kind: "vocab",
+      words: [
+        { nl: "nul", en: "zero", phonetic: "nul" },
+        { nl: "een", en: "one", phonetic: "ayn" },
+        { nl: "twee", en: "two", phonetic: "tway" },
+        { nl: "drie", en: "three", phonetic: "dree" },
+        { nl: "vier", en: "four", phonetic: "feer" },
+        { nl: "vijf", en: "five", phonetic: "veyf" },
+        { nl: "zes", en: "six", phonetic: "zes" },
+        { nl: "zeven", en: "seven", phonetic: "ZAY-vun" },
+        { nl: "acht", en: "eight", phonetic: "akht" },
+        { nl: "negen", en: "nine", phonetic: "NAY-khun" },
+        { nl: "tien", en: "ten", phonetic: "teen" },
+      ],
+    },
+    {
+      id: "u2-l2",
+      title: "Numbers 11–100",
+      kind: "vocab",
+      words: [
+        { nl: "elf", en: "eleven", phonetic: "elf" },
+        { nl: "twaalf", en: "twelve", phonetic: "twahlf" },
+        { nl: "dertien", en: "thirteen", phonetic: "DER-teen" },
+        { nl: "veertien", en: "fourteen", phonetic: "FAYR-teen" },
+        { nl: "vijftien", en: "fifteen", phonetic: "VEYF-teen" },
+        { nl: "twintig", en: "twenty", phonetic: "TWIN-tukh" },
+        { nl: "dertig", en: "thirty", phonetic: "DER-tukh" },
+        { nl: "veertig", en: "forty", phonetic: "FAYR-tukh" },
+        { nl: "vijftig", en: "fifty", phonetic: "VEYF-tukh" },
+        { nl: "zestig", en: "sixty", phonetic: "ZES-tukh" },
+        { nl: "zeventig", en: "seventy", phonetic: "ZAY-vun-tukh" },
+        { nl: "tachtig", en: "eighty", phonetic: "TAKH-tukh" },
+        { nl: "negentig", en: "ninety", phonetic: "NAY-khun-tukh" },
+        { nl: "honderd", en: "one hundred", phonetic: "HON-durt" },
+        {
+          nl: "eenentwintig",
+          en: "twenty-one",
+          phonetic: "AYN-en-TWIN-tukh",
+          note: "Dutch numbers join units + tens in one word, units first: een-en-twintig = 'one-and-twenty'.",
+        },
+      ],
+    },
+  ],
+};

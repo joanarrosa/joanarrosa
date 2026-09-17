@@ -1,0 +1,75 @@
+import type { Unit } from "../types";
+
+export const unit01: Unit = {
+  id: "u1",
+  title: "Greetings & Basics",
+  description: "Say hello, be polite, and meet the pronouns",
+  color: "duo-green",
+  lessons: [
+    {
+      id: "u1-l1",
+      title: "Hello & Goodbye",
+      kind: "phrases",
+      words: [
+        { nl: "hallo", en: "hello", phonetic: "HAH-loh" },
+        { nl: "hoi", en: "hi", phonetic: "hoy" },
+        { nl: "goedemorgen", en: "good morning", phonetic: "KHOO-duh-MOR-khun" },
+        { nl: "goedemiddag", en: "good afternoon", phonetic: "KHOO-duh-MID-dakh" },
+        { nl: "goedenavond", en: "good evening", phonetic: "KHOO-dun-AH-vont" },
+        { nl: "goedenacht", en: "good night", phonetic: "KHOO-dun-AKHT" },
+        { nl: "dag", en: "bye / hi", phonetic: "dakh" },
+        { nl: "doei", en: "bye (casual)", phonetic: "DOO-ee" },
+        { nl: "tot ziens", en: "see you later", phonetic: "tot zeens" },
+        { nl: "tot straks", en: "see you soon", phonetic: "tot straks" },
+        { nl: "tot morgen", en: "see you tomorrow", phonetic: "tot MOR-khun" },
+      ],
+    },
+    {
+      id: "u1-l2",
+      title: "Please & Thanks",
+      kind: "phrases",
+      words: [
+        { nl: "alsjeblieft", en: "please / here you go", phonetic: "ALS-yuh-bleeft" },
+        { nl: "alstublieft", en: "please (formal)", phonetic: "ALS-tew-bleeft" },
+        { nl: "dank je wel", en: "thank you (informal)", phonetic: "dahnk yuh VEL" },
+        { nl: "dank u wel", en: "thank you (formal)", phonetic: "dahnk EW VEL" },
+        { nl: "graag gedaan", en: "you're welcome", phonetic: "khrahkh khuh-DAHN" },
+        { nl: "sorry", en: "sorry", phonetic: "SOR-ree" },
+        { nl: "pardon", en: "excuse me", phonetic: "par-DON" },
+        { nl: "geen probleem", en: "no problem", phonetic: "khayn proh-BLAYM" },
+        { nl: "ja", en: "yes", phonetic: "yah" },
+        { nl: "nee", en: "no", phonetic: "nay" },
+        { nl: "misschien", en: "maybe", phonetic: "mis-KHEEN" },
+      ],
+    },
+    {
+      id: "u1-l3",
+      title: "Pronouns & Articles",
+      kind: "grammar",
+      grammarTips: [
+        {
+          title: "de vs. het",
+          body: "Dutch nouns are either 'de' words (most nouns, and all plurals) or 'het' words (most diminutives and many single-syllable neuter nouns). There's no reliable shortcut — you mostly learn each noun with its article.",
+        },
+        {
+          title: "jij vs. u",
+          body: "'Jij/je' is the informal 'you' for friends, family, and peers. 'U' is the formal/polite 'you', used with strangers, elders, or in professional settings.",
+        },
+      ],
+      words: [
+        { nl: "ik", en: "I", phonetic: "ik" },
+        { nl: "jij", en: "you (informal)", phonetic: "yey" },
+        { nl: "u", en: "you (formal)", phonetic: "ew" },
+        { nl: "hij", en: "he", phonetic: "hey" },
+        { nl: "zij", en: "she", phonetic: "zey" },
+        { nl: "het", en: "it", phonetic: "hut" },
+        { nl: "wij", en: "we", phonetic: "wey" },
+        { nl: "jullie", en: "you all", phonetic: "YUL-lee" },
+        { nl: "zij", en: "they", phonetic: "zey", note: "Same word as 'she' — context tells them apart." },
+        { nl: "de", en: "the (de-word)", phonetic: "duh" },
+        { nl: "het", en: "the (het-word)", phonetic: "hut" },
+        { nl: "een", en: "a / an", phonetic: "un" },
+      ],
+    },
+  ],
+};
