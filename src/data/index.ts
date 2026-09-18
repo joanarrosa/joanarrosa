@@ -41,22 +41,12 @@ export function findLesson(lessonId: string) {
   return null;
 }
 
-export function isUnitUnlocked(
-  unitIndex: number,
-  completedLessons: Record<string, number>
-): boolean {
-  if (unitIndex === 0) return true;
-  const prevUnit = UNITS[unitIndex - 1];
-  return prevUnit.lessons.every((l) => (completedLessons[l.id] ?? 0) > 0);
+// Every unit and lesson is open from the start — jump to whatever you want to
+// practice, in any order.
+export function isUnitUnlocked(): boolean {
+  return true;
 }
 
-export function isLessonUnlocked(
-  unitIndex: number,
-  lessonIndex: number,
-  completedLessons: Record<string, number>
-): boolean {
-  if (!isUnitUnlocked(unitIndex, completedLessons)) return false;
-  if (lessonIndex === 0) return true;
-  const prevLesson = UNITS[unitIndex].lessons[lessonIndex - 1];
-  return (completedLessons[prevLesson.id] ?? 0) > 0;
+export function isLessonUnlocked(): boolean {
+  return true;
 }

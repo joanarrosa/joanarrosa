@@ -10,8 +10,8 @@ interface UnitSectionProps {
 
 const offsets = ["translate-x-0", "translate-x-10", "translate-x-16", "translate-x-10", "translate-x-0", "-translate-x-10", "-translate-x-16", "-translate-x-10"];
 
-export default function UnitSection({ unit, unitIndex, progress }: UnitSectionProps) {
-  const unlocked = isUnitUnlocked(unitIndex, progress.completedLessons);
+export default function UnitSection({ unit, progress }: UnitSectionProps) {
+  const unlocked = isUnitUnlocked();
 
   return (
     <section className="mb-10">
@@ -28,7 +28,7 @@ export default function UnitSection({ unit, unitIndex, progress }: UnitSectionPr
           <LessonNode
             key={lesson.id}
             lesson={lesson}
-            unlocked={isLessonUnlocked(unitIndex, i, progress.completedLessons)}
+            unlocked={isLessonUnlocked()}
             completed={(progress.completedLessons[lesson.id] ?? 0) > 0}
             offsetClass={offsets[i % offsets.length]}
           />
