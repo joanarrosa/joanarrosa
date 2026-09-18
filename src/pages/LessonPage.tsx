@@ -1,33 +1,19 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ALL_WORDS, findLesson } from "../data";
-import { buildLessonExercises, normalizeAnswer } from "../lib/exercises";
+import { findLesson } from "../data";
 import { loadProgress, recordLessonComplete } from "../lib/storage";
-import ProgressBar from "../components/ProgressBar";
-import ExerciseView from "../components/ExerciseView";
-import LessonFlashcards from "../components/LessonFlashcards";
+import LessonReader from "../components/LessonReader";
 import type { Progress } from "../types";
 
-const XP_PER_CORRECT = 10;
+const LESSON_COMPLETION_XP = 20;
 
 export default function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
   const navigate = useNavigate();
   const found = lessonId ? findLesson(lessonId) : null;
 
-  const exercises = useMemo(
-    () => (found ? buildLessonExercises(found.lesson, ALL_WORDS) : []),
-    [found?.lesson.id]
-  );
-
-  const [index, setIndex] = useState(0);
-  const [value, setValue] = useState("");
-  const [checked, setChecked] = useState(false);
-  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  const [correctCount, setCorrectCount] = useState(0);
   const [finished, setFinished] = useState<Progress | null>(null);
   const [showIntro, setShowIntro] = useState(true);
-  const [showFlashcards, setShowFlashcards] = useState(true);
 
   if (!found) {
     return (
@@ -41,38 +27,15 @@ export default function LessonPage() {
   }
 
   const { lesson } = found;
-  const current = exercises[index];
+  const cardCount =
+    lesson.words.length + (lesson.conjugations?.length ?? 0) + (lesson.sentences?.length ?? 0);
 
-  function evaluate(): boolean {
-    if (!current) return false;
-    if (current.type === "typing" || current.type === "sentence-builder") {
-      return normalizeAnswer(value) === normalizeAnswer(current.correctAnswer);
-    }
-    return value === current.correctAnswer;
-  }
-
-  function handleCheck() {
-    const correct = evaluate();
-    setIsCorrect(correct);
-    setChecked(true);
-    if (correct) setCorrectCount((c) => c + 1);
-  }
-
-  function handleContinue() {
-    if (index + 1 < exercises.length) {
-      setIndex((i) => i + 1);
-      setValue("");
-      setChecked(false);
-      setIsCorrect(null);
-    } else {
-      const xp = correctCount * XP_PER_CORRECT;
-      const updated = recordLessonComplete(loadProgress(), lesson.id, xp);
-      setFinished(updated);
-    }
+  function handleDone() {
+    const updated = recordLessonComplete(loadProgress(), lesson.id, LESSON_COMPLETION_XP);
+    setFinished(updated);
   }
 
   if (finished) {
-    const accuracy = exercises.length > 0 ? Math.round((correctCount / exercises.length) * 100) : 0;
     return (
       <div className="min-h-screen flex items-center justify-center px-4">
         <div className="max-w-sm w-full text-center bg-white rounded-2xl shadow-lg p-8">
@@ -81,14 +44,12 @@ export default function LessonPage() {
           <p className="text-gray-500 mb-6">{lesson.title}</p>
           <div className="grid grid-cols-2 gap-4 mb-8">
             <div className="bg-yellow-50 rounded-xl py-4">
-              <div className="text-2xl font-extrabold text-yellow-600">
-                +{correctCount * XP_PER_CORRECT}
-              </div>
+              <div className="text-2xl font-extrabold text-yellow-600">+{LESSON_COMPLETION_XP}</div>
               <div className="text-xs text-gray-500 font-semibold">XP EARNED</div>
             </div>
             <div className="bg-green-50 rounded-xl py-4">
-              <div className="text-2xl font-extrabold text-green-600">{accuracy}%</div>
-              <div className="text-xs text-gray-500 font-semibold">ACCURACY</div>
+              <div className="text-2xl font-extrabold text-green-600">{cardCount}</div>
+              <div className="text-xs text-gray-500 font-semibold">THINGS LEARNED</div>
             </div>
           </div>
           <div className="flex items-center justify-center gap-2 text-orange-500 font-bold mb-8">
@@ -131,78 +92,5 @@ export default function LessonPage() {
     );
   }
 
-  if (showFlashcards && lesson.words.length > 0) {
-    return (
-      <LessonFlashcards
-        words={lesson.words}
-        lessonTitle={lesson.title}
-        onDone={() => setShowFlashcards(false)}
-      />
-    );
-  }
-
-  if (!current) return null;
-
-  return (
-    <div className="min-h-screen flex flex-col">
-      <div className="px-4 py-4 flex items-center gap-4 max-w-2xl mx-auto w-full">
-        <button
-          onClick={() => navigate("/")}
-          aria-label="Exit lesson"
-          className="text-gray-400 hover:text-gray-600 text-2xl leading-none"
-        >
-          ✕
-        </button>
-        <ProgressBar value={index} max={exercises.length} />
-      </div>
-
-      <div className="flex-1 flex items-start justify-center px-4">
-        <div className="w-full max-w-2xl pt-6">
-          <ExerciseView
-            exercise={current}
-            value={value}
-            onChange={setValue}
-            disabled={checked}
-            isCorrect={isCorrect}
-          />
-        </div>
-      </div>
-
-      <div
-        className={`px-4 py-5 border-t ${
-          checked ? (isCorrect ? "bg-green-50 border-green-100" : "bg-red-50 border-red-100") : "bg-white border-gray-100"
-        }`}
-      >
-        <div className="max-w-2xl mx-auto flex items-center justify-between">
-          {checked ? (
-            <p className={`font-extrabold text-lg ${isCorrect ? "text-duo-green" : "text-duo-red"}`}>
-              {isCorrect ? "Correct! 🎉" : "Not quite"}
-            </p>
-          ) : (
-            <span />
-          )}
-          {!checked ? (
-            <button
-              onClick={handleCheck}
-              disabled={!value}
-              className="ml-auto bg-duo-green disabled:bg-gray-300 hover:bg-duo-green-dark text-white font-extrabold px-8 py-3 rounded-xl border-b-4 border-duo-green-dark disabled:border-gray-400 active:border-b-0 active:translate-y-1 transition"
-            >
-              Check
-            </button>
-          ) : (
-            <button
-              onClick={handleContinue}
-              className={`ml-auto text-white font-extrabold px-8 py-3 rounded-xl border-b-4 active:border-b-0 active:translate-y-1 transition ${
-                isCorrect
-                  ? "bg-duo-green hover:bg-duo-green-dark border-duo-green-dark"
-                  : "bg-duo-red hover:bg-red-600 border-red-700"
-              }`}
-            >
-              Continue
-            </button>
-          )}
-        </div>
-      </div>
-    </div>
-  );
+  return <LessonReader lesson={lesson} onDone={handleDone} />;
 }

@@ -55,13 +55,6 @@ export const unit06: Unit = {
         { nl: "waarom huil je?", en: "why are you crying?", phonetic: "VAH-rom hoyl yuh" },
         { nl: "wat doe je?", en: "what are you doing?", phonetic: "vat doo yuh" },
       ],
-      sentences: [
-        { nl: "Ik drink koffie", en: "I drink coffee" },
-        { nl: "Morgen ga ik werken", en: "Tomorrow I'm going to work" },
-        { nl: "Vandaag heb ik tijd", en: "Today I have time" },
-        { nl: "Ga je mee?", en: "Are you coming along?" },
-        { nl: "Wat doe je?", en: "What are you doing?" },
-      ],
     },
     {
       id: "u6-l3",

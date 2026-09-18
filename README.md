@@ -1,26 +1,31 @@
 # Leer Nederlands — Learn Dutch
 
-A Duolingo-style app for learning Dutch: daily lessons, verb conjugations,
-everyday phrases, and pronunciation help — all with no sign-up, no backend,
-and no ads.
+A self-paced reading app for learning Dutch: browse vocabulary, verb
+conjugations, and example phrases at your own pace, with pronunciation for
+every word — no quizzes, no right/wrong answers, no sign-up, no ads.
 
 ## Features
 
-- **11 units / 24 lessons**: greetings, numbers, key verbs (zijn/hebben/gaan),
-  more verbs, everyday phrases, grammar (de/het, word order), food &
-  restaurant, directions & travel, time & dates, shopping, and past tense &
-  separable verbs.
-- **Pronunciation help**: every word shows a simplified phonetic guide
-  (e.g. *goedemorgen* → `KHOO-duh-MOR-khun`), plus a speaker button that
-  plays real Dutch audio using your browser's built-in text-to-speech.
-- **Listening exercises**: hear a word or phrase spoken and pick what it
-  means, to train your ear alongside reading/writing.
-- **Verb conjugation drills**: fill-in-the-blank exercises for present and
-  past tense of core verbs.
+- **12 units / 27 lessons**: greetings, numbers, key verbs (zijn/hebben/gaan),
+  more verbs, everyday phrases, grammar (de/het, word order, negation,
+  questions), food & restaurant, directions & travel, time & dates, shopping,
+  past tense & separable verbs, and more vocabulary (colors, adjectives,
+  family).
+- **All lessons open from the start** — browse in any order, no locked
+  levels.
+- **Pure reading, no quizzes**: every lesson is a deck of cards you flip
+  through at your own pace — words, verb conjugation tables, and example
+  sentences — with nothing to get "wrong".
+- **Pronunciation for everything**: every word, verb form, and example
+  sentence shows a simplified phonetic guide (e.g. *goedemorgen* →
+  `KHOO-duh-MOR-khun`) plus a speaker button that plays real Dutch audio
+  using your browser's built-in text-to-speech.
+- **Verb conjugation tables**: full present/past tense tables for core verbs
+  (zijn, hebben, gaan, willen, kunnen, moeten, mogen...), each row with audio.
 - **Grammar tips**: short explainer cards (de/het, word order, 't kofschip,
   separable verbs) shown before the relevant lesson.
-- **Streaks, XP, and a daily goal**, saved locally in your browser — no
-  account needed.
+- **Streak and XP tracking**, saved locally in your browser — no account
+  needed.
 
 ## Using it — no install needed
 
